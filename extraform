@@ -1,0 +1,5 @@
+<%= form_with(model: chat) do |form| %>
+    <%= form.label :message, style: "display: block" %>
+    <%= form.text_field :message %>
+    <%= form.submit %>
+<% end %>

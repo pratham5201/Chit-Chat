@@ -1,0 +1,24 @@
+<center>
+<p style="color: green"><%= notice %></p>
+
+<h1>All Groups</h1>
+
+
+
+<%ender "search"%>
+<div id="groups">
+  <% @groups.each do |group| %>
+    <% if group.id == 4 %>
+      
+    <% else %>
+      <%= render group %>
+      <p>
+        <%= link_to "JOIN", group %>
+      </p>
+      <hr>
+    <% end %>
+  <% end %>
+</div>
+<hr>
+<%= link_to "Create group", new_group_path %>
+</center>

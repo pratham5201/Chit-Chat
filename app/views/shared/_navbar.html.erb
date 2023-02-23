@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary">
+    <div class="container-fluid bg-dark" data-bs-theme="dark">
+      <i class="fab fa-whatsapp navbar-brand"></i>
+       <%= link_to "Chit-chat", root_path(), class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <%= link_to "|new-Group-chat|", new_group_path(), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Groups", groups_path(), class: "nav-link active" %>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu">
+
+              <% if user_signed_in? %>
+                <li><a class="dropdown-item" href="#"><%= link_to "Edit profile", edit_user_registration_path, class: "navbar-link" %> </a></li>
+                <li><a class="dropdown-item" href="#"><%= link_to 'Sign out', destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?' } %></a></li>
+              <% else %>
+                <li><a class="dropdown-item" href="#"><%= link_to "Sign up", new_user_registration_path, class: "navbar-link"  %> </a></li>
+                <li><a class="dropdown-item" href="#"><%= link_to "Login", new_user_session_path, class: "navbar-link"  %> </a></li>
+              <% end %>
+
+              <li><a class="dropdown-item" href="#">
+              <hr class="dropdown-divider"></li>
+              <a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+        </ul>
+        </div>
+        <div class="text-right ml-auto">
+
+        <%= search_form_for(@query, url: root_path, method: :get, class: 'd-flex') do |f| %>
+        <%= f.search_field :message_i_cont_any, placeholder: "Search" , class: "srch me-2 form-control btn" %>
+            <%= f.submit "Search", class: "btn2 btn btn-outline-success"  %>
+        <% end %>
+        
+        <%# <form class="d-flex" role="search">
+          <input class="form-control " type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success " type="submit">Search</button>
+        </form> %>
+
+        </div>
+        <div class="text-right ml-auto">
+        <u class="text-blue">
+          <% if user_signed_in? %>
+            Logged in as <strong class="text-white"><%= current_user.email %></strong>
+          <% end %>
+        </u>
+        </div>
+      </div>
+    </div>
+  </nav>

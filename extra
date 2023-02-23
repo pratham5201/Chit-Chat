@@ -1,0 +1,20 @@
+<div class="chat-bubble">
+    <div class="d-flex">
+      <small class="chat-username mr-2"><%= chat.username %></small>
+      <div class="ml-auto">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-v"></i>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+            <%= form_for chat, url: chat_path(chat), method: :delete, data: { confirm: 'Are you sure?' } do |f| %>
+              <%= f.button type: 'submit', class: "dropdown-item", "data-method" => "delete", "data-confirm" => "Are you sure?" do %>
+                Delete
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="m-0 chat-message"><%= chat.message %></p>
+  </div>
