@@ -3,3 +3,9 @@
     <%= form.text_field :message %>
     <%= form.submit %>
 <% end %>
+
+<div class="color-red ">
+<hr>
+<h1><center> <%= @receiver_name %> </center></h1>
+<hr>
+</div>

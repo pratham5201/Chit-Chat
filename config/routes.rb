@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :userchats
   devise_for :users
   resources :chats
   root 'chats#index'

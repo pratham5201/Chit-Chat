@@ -4,3 +4,8 @@
 require_relative "config/application"
 
 Rails.application.load_tasks
+
+desc "Print reminder about eating more fruit."
+task :apple do
+  puts "Eat more apples!"
+end

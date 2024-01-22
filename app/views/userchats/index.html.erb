@@ -27,9 +27,12 @@
 
     <div class="col-9 col-md-8 bg-light full-height">
       <div class="container-fluid">
+
+
+
         <div class="chat-box py-2">
           <h4 class="username d-none mb-3"></h4>
-          <% @chats.each do |chat| %>
+          <% @userchats.each do |chat| %>
             <div class="row">
               <div class="col-12">
 
@@ -43,8 +46,8 @@
                             <i class="fas fa-ellipsis-v text-white"></i>
                           </button>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <%= link_to "Edit", chats_path(chat), class: 'dropdown-item' %>
-                            <%= form_for chat, url: chat_path(chat), method: :delete, data: { confirm: 'Are you sure?' } do |f| %>
+                            <%= link_to "Edit", edit_userchat_path(chat), class: 'dropdown-item' %>
+                            <%= form_for chat, url: userchat_path(chat), method: :delete, data: { confirm: 'Are you sure?' } do |f| %>
                               <%= f.button type: 'submit', class: 'dropdown-item' do %>
                                 Delete
                               <% end %>
@@ -57,7 +60,7 @@
 
 
                   </div>
-                <% else %>
+                <% elsif chat.username == @receiver_name %>
                   <div class="chat bg-secondary d-inline-block text-left text-white mb-2">
                     <div class="chat-bubble chat-style">
                       <small class="chat-username"><%= chat.username %></small>
@@ -75,23 +78,26 @@
 
         </div>
         <div class="chat-text-input">
-          <%= form_with(model: @chat, remote: true, format: :json, id: 'chat-form') do |form| %>
-            <% if @chat.errors.any? %>
+          <%= form_with(model: @userchat, remote: true, format: :json, id: 'userchat-form') do |form| %>
+            <% if @userchat.errors.any? %>
               <div id="error_explanation">
-                <h2><%= pluralize(@chat.errors.count, "error") %> prohibited this chat from being saved:</h2>
+                <h2><%= pluralize(@userchat.errors.count, "error") %> prohibited this chat from being saved:</h2>
                 <ul>
-                  <% @chat.errors.full_messages.each do |message| %>
+                  <% @userchat.errors.full_messages.each do |message| %>
                     <li><%= message %></li>
                   <% end %>
                 </ul>
               </div>
             <% end %>
-            <%= will_paginate @chats %>
+
+            <%# <%= will_paginate @userchats %>
+
             <div class="field position-relative">
               <%= form.text_field :message, id: :message, class: "form-control", required: true %>
               <%= form.hidden_field :username, id: :username %>
             </div>
           <% end %>
+
         </div>
         
       </div>
@@ -102,7 +108,7 @@
       <div class="text-black mt-5 text-center">
         <div class="chat d-inline-block text-left text-white mb-2 float-right red">
 
-          <% if @searched.count <  @chats.count%>
+          <% if @searched.count <  @userchats.count%>
             <% @searched.each do |chat| %>
             <div class="col-12 ">
               <div class="chat bg-dark d-inline-block text-left text-white mb-2 ">
